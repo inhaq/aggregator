@@ -2,11 +2,7 @@ import Search from "./Search";
 import Socials from "./Socials";
 import { useState } from "react";
 
-export default function Nav() {
-  const [search, setSearch] = useState("");
-  const handleSearch = (keyword) => {
-    setSearch(keyword);
-  };
+export default function Nav({ search, setSearch }) {
   return (
     <nav className="flex items-center justify-between h-20">
       <div className="flex items-center max-w-sm">
@@ -17,7 +13,7 @@ export default function Nav() {
           </span>
         </a>
       </div>
-      <Search onSearch={handleSearch} />
+      <Search search={search} setSearch={setSearch} />
       <Socials />
     </nav>
   );

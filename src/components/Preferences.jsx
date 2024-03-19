@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function Preferences({ subscriptions, setSubscriptions }) {
-  // Load subscriptions from localStorage when component mounts
   useEffect(() => {
     const loadedSubscriptions = localStorage.getItem("subscriptions");
     if (loadedSubscriptions) {
@@ -9,7 +8,6 @@ export default function Preferences({ subscriptions, setSubscriptions }) {
     }
   }, []);
 
-  // Save subscriptions to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
   }, [subscriptions]);
@@ -22,21 +20,27 @@ export default function Preferences({ subscriptions, setSubscriptions }) {
   };
 
   return (
-    <div>
+    <div className="w-60">
+      <p className="mt-5 text-sm font-bold text-gray-400 uppercase font-title">
+        Subscribe
+      </p>
       <div
         onClick={() => toggleSubscription("newsAPI")}
+        className="p-4 mr-3 cursor-pointer hover:bg-gray-200"
         style={{ color: subscriptions.newsAPI ? "green" : "red" }}
       >
         News API
       </div>
       <div
         onClick={() => toggleSubscription("theGuardian")}
+        className="p-4 mr-3 cursor-pointer hover:bg-gray-200"
         style={{ color: subscriptions.theGuardian ? "green" : "red" }}
       >
         The Guardian
       </div>
       <div
         onClick={() => toggleSubscription("NYTimes")}
+        className="p-4 mr-3 cursor-pointer hover:bg-gray-200"
         style={{ color: subscriptions.NYTimes ? "green" : "red" }}
       >
         NY Times

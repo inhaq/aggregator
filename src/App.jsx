@@ -16,6 +16,7 @@ function App() {
     theGuardian: true,
     NYTimes: true,
   };
+
   const [subscriptions, setSubscriptions] = useState(() => {
     const loadedSubscriptions = localStorage.getItem("subscriptions");
     return loadedSubscriptions
@@ -23,13 +24,19 @@ function App() {
       : defaultSubscriptions;
   });
 
-  // Save subscriptions to localStorage whenever they change
+  const [search, setSearch] = useState(() => {
+    const loadedSearch = localStorage.getItem("search");
+    return loadedSearch ? JSON.parse(loadedSearch) : "";
+  });
+
   useEffect(() => {
     localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
-  }, [subscriptions]);
+    localStorage.setItem("search", JSON.stringify(search));
+  }, [subscriptions, search]);
+
   return (
     <>
-      <Nav />
+      <Nav search={search} setSearch={setSearch} />
       <SubNav />
       <div className="flex">
         <Preferences
@@ -37,7 +44,7 @@ function App() {
           setSubscriptions={setSubscriptions}
         />
         <QueryClientProvider client={queryClient}>
-          <PostList subscriptions={subscriptions} />
+          <PostList subscriptions={subscriptions} search={search} />
         </QueryClientProvider>
       </div>
       <Post />

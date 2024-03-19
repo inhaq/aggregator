@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useEffect } from "react";
 
-export default function Search({ onSearch }) {
-  const [search, setSearch] = useState("");
-
+export default function Search({ search, setSearch }) {
+  const [localSearch, setLocalSearch] = useState(search);
   useEffect(() => {
-    handleClear();
-  }, []);
+    if (localSearch === "") {
+      setSearch(null);
+      localStorage.setItem("search", JSON.stringify(null));
+    }
+  }, [localSearch, setSearch]);
   const handleSubmit = (event) => {
     event.preventDefault();
-    localStorage.setItem("keyword", JSON.stringify(search));
-    onSearch(search);
-  };
-  const handleClear = () => {
-    setSearch("");
-    localStorage.removeItem("keyword");
+    let searchValue = event.target.elements.search.value;
+
+    if (searchValue === "") {
+      searchValue = null;
+    }
+
+    setSearch(searchValue);
+    localStorage.setItem("search", JSON.stringify(searchValue));
   };
 
   return (
@@ -29,13 +32,13 @@ export default function Search({ onSearch }) {
             <FaMagnifyingGlass size={18} className="text-gray-300" />
           </label>
           <input
-            type="text"
+            type="search"
             name="Search"
             placeholder="Type to search"
             id="search"
             className="w-full h-12 py-2 pl-10 pr-4 border border-gray-300 focus:outline-none focus:border-blue-600 placeholder:font-title placeholder:text-gray-4"
-            value={search || ""}
-            onChange={(e) => setSearch(e.target.value)}
+            value={localSearch || ""}
+            onChange={(e) => setLocalSearch(e.target.value)}
           />
         </form>
       </div>

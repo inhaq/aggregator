@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="font-title text-gray-600 py-4 border-t-[1px] border-gray-200">
-      <div className="container mx-auto text-center flex justify-between">
+      <div className="container flex justify-between mx-auto text-center">
         <p>
           Authored with ❤️ by{" "}
           <a
