@@ -22,7 +22,7 @@ export default function Search({ search, setSearch }) {
   };
 
   return (
-    <div className="flex items-center w-96 -ml-[150px]">
+    <div className="flex items-center w-full md:w-96 -ml-0 md:-ml-[150px]">
       <div className="relative w-full">
         <form onSubmit={handleSubmit}>
           <label
@@ -34,7 +34,7 @@ export default function Search({ search, setSearch }) {
           <input
             type="search"
             name="Search"
-            placeholder="Type to search"
+            placeholder="Type to search and press enter"
             id="search"
             className="w-full h-12 py-2 pl-10 pr-4 border border-gray-300 focus:outline-none focus:border-blue-600 placeholder:font-title placeholder:text-gray-4"
             value={localSearch || ""}

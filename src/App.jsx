@@ -35,21 +35,20 @@ function App() {
   }, [subscriptions, search]);
 
   return (
-    <>
-      <Nav search={search} setSearch={setSearch} />
-      <SubNav />
-      <div className="flex">
-        <Preferences
-          subscriptions={subscriptions}
-          setSubscriptions={setSubscriptions}
-        />
-        <QueryClientProvider client={queryClient}>
-          <PostList subscriptions={subscriptions} search={search} />
-        </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <div className="flex flex-col p-3">
+        <Nav search={search} setSearch={setSearch} />
+        <SubNav />
+        <div className="flex flex-col md:flex-row">
+          <Preferences
+            subscriptions={subscriptions}
+            setSubscriptions={setSubscriptions}
+          />
+          <PostList search={search} subscriptions={subscriptions} />
+        </div>
+        <Footer />
       </div>
-      <Post />
-      <Footer />
-    </>
+    </QueryClientProvider>
   );
 }
 

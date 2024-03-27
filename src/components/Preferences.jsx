@@ -20,7 +20,7 @@ export default function Preferences({ subscriptions, setSubscriptions }) {
   };
 
   return (
-    <div className="w-60">
+    <div className="w-full sm:w-80">
       <p className="mt-5 text-sm font-bold text-gray-400 uppercase font-title">
         Subscribe
       </p>

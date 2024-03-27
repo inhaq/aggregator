@@ -74,11 +74,15 @@ export default function PostList({ search, subscriptions }) {
   }
 
   if (isError) {
-    return <div>Error fetching data/API Rate exceeded</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Error fetching data/API Rate exceeded
+      </div>
+    );
   }
 
   return (
-    <div className="justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full md:w-auto">
       {posts && posts.length === 0 ? (
         <p className="flex items-center justify-center text-gray-500 h-80">
           No source subscribed / Article not found in source. Please subscribe
